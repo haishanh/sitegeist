@@ -9,6 +9,7 @@
 ### Changed
 
 - Migrated dependency management and development workflows from npm and sibling repositories to pnpm.
+- Updated TypeScript, esbuild, concurrently, and Three.js dependencies.
 
 ## [1.0.0] - 2026-03-15
 
