@@ -34,6 +34,18 @@
 		}
 	},
 	"files": {
-		"includes": ["src/**/*", "scripts/**/*", "*.json", "*.md", "!**/node_modules/**/*", "!site", "!!**/node_modules"]
+		"includes": [
+			"src/**/*",
+			"scripts/**/*",
+			"packages/pi-web-ui/src/**/*.ts",
+			"packages/pi-web-ui/scripts/**/*.ts",
+			"packages/pi-web-ui/package.json",
+			"packages/pi-web-ui/README.md",
+			"*.json",
+			"*.md",
+			"!**/node_modules/**/*",
+			"!site",
+			"!!**/node_modules"
+		]
 	}
 }

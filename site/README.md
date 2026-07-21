@@ -5,10 +5,10 @@ Email signup landing page with backend storage and Three.js orb animation.
 ## Quick Start
 
 ```bash
-npm install
-npm run dev          # Backend on :3000, Frontend on :8080
-npm run build        # Build for production
-npm run deploy       # Deploy to production server
+pnpm install
+pnpm run dev          # Backend on :3000, Frontend on :8080
+pnpm run build        # Build for production
+pnpm run deploy       # Deploy to production server
 ```
 
 ## Project Structure

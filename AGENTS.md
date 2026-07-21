@@ -5,7 +5,7 @@ If the user did not give you a concrete task, read README.md first.
 
 ## Commands
 - After code changes: run `./check.sh`. Fix all errors and warnings before committing.
-- The user runs `./dev.sh` in a separate tmux session. Do not run `npm run dev` or `npm run build`.
+- The user runs `./dev.sh` in a separate tmux session. Do not run `pnpm run dev` or `pnpm run build`.
 - NEVER commit unless the user asks.
 
 ## Code Quality
@@ -15,9 +15,10 @@ If the user did not give you a concrete task, read README.md first.
 - Always ask before removing functionality or code that appears intentional
 
 ## Dependencies
-- `@mariozechner/mini-lit`, `@mariozechner/pi-ai`, `@mariozechner/pi-web-ui`, `@mariozechner/pi-agent-core` are linked via `file:` to sibling repos `../mini-lit` and `../pi-mono`
-- Changes to those packages require rebuilding them (the dev watcher handles this)
-- If you need to modify upstream code, edit it in `../pi-mono` or `../mini-lit` directly and rebuild
+- `@mariozechner/mini-lit`, `@earendil-works/pi-ai`, and `@earendil-works/pi-agent-core` are installed from npm.
+- `@earendil-works/pi-web-ui` is a workspace package at `packages/pi-web-ui`.
+- Changes to `pi-web-ui` require rebuilding it (the dev watcher handles this).
+- Upstream `pi-ai` and `pi-agent-core` changes should be made in the `earendil-works/pi` repository and released before updating their pinned versions here.
 
 ## Changelog
 Location: `CHANGELOG.md`

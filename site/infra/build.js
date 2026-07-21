@@ -6,11 +6,11 @@ const execAsync = promisify(exec);
 async function build() {
 	// Build frontend (this clears dist/)
 	console.log("Building frontend...");
-	await execAsync("npx vite build -c infra/vite.config.ts");
+	await execAsync("pnpm exec vite build -c infra/vite.config.ts");
 
 	// Build backend (into dist/backend + dist/shared)
 	console.log("Building backend...");
-	await execAsync("npx tsc -p tsconfig.backend.json");
+	await execAsync("pnpm exec tsc -p tsconfig.backend.json");
 
 	console.log("✓ Build complete");
 }

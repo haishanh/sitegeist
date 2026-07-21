@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+### Added
+
+- Added local `pi-web-ui` workspace package and pnpm workspace configuration.
+
+### Changed
+
+- Migrated dependency management and development workflows from npm and sibling repositories to pnpm.
+
 ## [1.0.0] - 2026-03-15
 
 ### Added

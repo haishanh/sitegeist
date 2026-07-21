@@ -14,27 +14,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.8.0
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: pnpm
 
-      - name: Clone mini-lit
-        run: git clone --depth 1 https://github.com/badlogic/mini-lit.git ../mini-lit
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - name: Clone pi-mono
-        run: git clone --depth 1 https://github.com/badlogic/pi-mono.git ../pi-mono
-
-      - name: Install mini-lit
-        run: cd ../mini-lit && npm install && npm run build
-
-      - name: Install pi-mono
-        run: cd ../pi-mono && npm install && npm run build
-
-      - name: Install sitegeist
-        run: npm install
+      - name: Build pi-web-ui
+        run: pnpm --filter @earendil-works/pi-web-ui build
 
       - name: Build extension
-        run: npm run build
+        run: pnpm build
 
       - name: Create zip
         run: |

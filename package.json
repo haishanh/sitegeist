@@ -5,22 +5,24 @@
 	"description": "AI-powered browser extension for web navigation and interaction",
 	"type": "module",
 	"main": "dist/background.js",
+	"packageManager": "pnpm@11.8.0",
 	"scripts": {
 		"clean": "rm -rf dist-chrome",
-		"build:chrome": "node ./scripts/build.mjs && tailwindcss -i ./src/app.css -o ./dist-chrome/app.css --minify",
-		"build": "npm run build:chrome",
-		"dev": "concurrently -n \"build,css,server\" -c \"blue,green,yellow\" \"node ./scripts/build.mjs --watch\" \"tailwindcss -i ./src/app.css -o ./dist-chrome/app.css --watch\" \"node ./scripts/dev-server.mjs\"",
+		"build:chrome": "node ./scripts/build.mjs && pnpm exec tailwindcss -i ./src/app.css -o ./dist-chrome/app.css --minify",
+		"build": "pnpm run build:chrome",
+		"dev": "concurrently -n \"build,css,server\" -c \"blue,green,yellow\" \"node ./scripts/build.mjs --watch\" \"pnpm exec tailwindcss -i ./src/app.css -o ./dist-chrome/app.css --watch\" \"node ./scripts/dev-server.mjs\"",
 		"typecheck": "tsc --noEmit",
-		"check": "biome check --write . && tsc --noEmit && cd site && npm run check",
+		"check": "biome check --write . && tsc --noEmit && pnpm --filter @earendil-works/pi-web-ui check && pnpm --filter sitegeist-site check",
 		"prepare": "husky"
 	},
 	"dependencies": {
 		"@mariozechner/jailjs": "^0.1.0",
-		"@mariozechner/mini-lit": "file:../mini-lit",
-		"@mariozechner/pi-agent-core": "file:../pi-mono/packages/agent",
-		"@mariozechner/pi-ai": "file:../pi-mono/packages/ai",
-		"@mariozechner/pi-web-ui": "file:../pi-mono/packages/web-ui",
-		"@sinclair/typebox": "^0.34.41",
+		"@opentelemetry/api": "^1.9.0",
+		"@mariozechner/mini-lit": "0.2.1",
+		"@earendil-works/pi-agent-core": "0.75.3",
+		"@earendil-works/pi-ai": "0.75.3",
+		"@earendil-works/pi-web-ui": "workspace:*",
+		"typebox": "1.1.24",
 		"chart.js": "^4.5.1",
 		"docx-preview": "^0.3.7",
 		"fuse.js": "^7.1.0",
@@ -44,6 +46,7 @@
 		"concurrently": "^9.2.1",
 		"esbuild": "^0.25.10",
 		"husky": "^9.1.7",
-		"ws": "^8.18.0"
+		"ws": "^8.18.0",
+		"typescript": "^5.7.3"
 	}
 }

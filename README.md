@@ -16,37 +16,26 @@ Requires Chrome 141+ or Edge equivalent.
 
 ## Development
 
-Clone this repo plus its sibling dependencies into the same parent directory:
-
-```
-parent/
-  mini-lit/          # https://github.com/badlogic/mini-lit
-  pi-mono/           # https://github.com/badlogic/pi-mono
-  sitegeist/         # this repo
-```
-
-Install dependencies in each repo:
+Install dependencies with pnpm:
 
 ```bash
-(cd ../mini-lit && npm install)
-(cd ../pi-mono && npm install)
-npm install
+pnpm install
 ```
 
-`npm install` sets up the Husky pre-commit hook automatically.
+The repository contains the extension and the `pi-web-ui` workspace package. `pnpm install` also sets up the Husky pre-commit hook.
 
-Start all dev watchers (mini-lit, pi-mono, sitegeist extension, marketing site):
+Start all dev watchers (pi-web-ui, Sitegeist extension, marketing site):
 
 ```bash
 ./dev.sh
 ```
 
-Changes in `../mini-lit` or `../pi-mono` are rebuilt automatically and picked up by the sitegeist watcher.
+Changes in `packages/pi-web-ui` are rebuilt automatically and picked up by the Sitegeist watcher.
 
 To run only the extension watcher without dependencies or the marketing site:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ### Loading the extension
@@ -80,7 +69,7 @@ The Husky pre-commit hook runs the same checks before each commit.
 ## Building
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 The unpacked extension is written to `dist-chrome/`.

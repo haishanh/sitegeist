@@ -10,18 +10,18 @@ SERVER_DIR=/home/badlogic/sitegeist.ai
 case "$1" in
 dev)
     echo "Starting dev server at http://localhost:8080"
-    npx vite --config infra/vite.config.ts
+    pnpm exec vite --config infra/vite.config.ts
     ;;
 
 build)
     echo "Building static site..."
-    npx vite build --config infra/vite.config.ts
+    pnpm exec vite build --config infra/vite.config.ts
     echo "Done. Output in dist/"
     ;;
 
 deploy)
-    npm install
-    npx vite build --config infra/vite.config.ts
+    pnpm install
+    pnpm exec vite build --config infra/vite.config.ts
 
     echo "Uploading to $SERVER..."
     ssh $SERVER "mkdir -p $SERVER_DIR/uploads"

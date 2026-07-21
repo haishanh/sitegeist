@@ -8,8 +8,8 @@ import {
 	type AgentMessage,
 	type AgentState,
 	type AgentTool,
-} from "@mariozechner/pi-agent-core";
-import { getModel, getModels, type Model } from "@mariozechner/pi-ai";
+} from "@earendil-works/pi-agent-core";
+import { getModel, getModels, type Model } from "@earendil-works/pi-ai";
 import {
 	ChatPanel,
 	createExtractDocumentTool,
@@ -20,7 +20,7 @@ import {
 	// PersistentStorageDialog,
 	setAppStorage,
 	setShowJsonMode,
-} from "@mariozechner/pi-web-ui";
+} from "@earendil-works/pi-web-ui";
 import { html, render } from "lit";
 import { History, Plus, Settings } from "lucide";
 import { AboutTab } from "./dialogs/AboutTab.js";
@@ -548,19 +548,19 @@ const createAgent = async (initialState?: Partial<AgentState>, shouldSave = true
 			const extractImageTool = new ExtractImageTool();
 			extractImageTool.windowId = currentWindowId;
 
-			const tools: AgentTool<any, any>[] = [
+			const tools = [
 				navigateTool,
 				selectElementTool,
 				replTool,
 				skillTool,
 				extractDocumentTool,
 				extractImageTool,
-			];
+			] as unknown as AgentTool[];
 
 			// Conditionally add debugger tool if enabled
 			if (debuggerModeEnabled) {
 				const debuggerTool = new DebuggerTool();
-				tools.push(debuggerTool);
+				tools.push(debuggerTool as unknown as AgentTool);
 			}
 
 			return tools;
