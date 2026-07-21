@@ -11,6 +11,10 @@
 - Migrated dependency management and development workflows from npm and sibling repositories to pnpm.
 - Updated TypeScript, esbuild, concurrently, and Three.js dependencies.
 
+### Fixed
+
+- Fixed the message editor remaining in stop mode after an agent run completed.
+
 ## [1.0.0] - 2026-03-15
 
 ### Added

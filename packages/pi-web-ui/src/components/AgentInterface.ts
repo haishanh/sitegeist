@@ -173,6 +173,9 @@ export class AgentInterface extends LitElement {
 						this._streamingContainer.setMessage(null, true);
 					}
 					this.requestUpdate();
+					// AgentCore clears state.isStreaming after agent_end listeners complete.
+					// Re-render once that lifecycle callback has finished so the editor exits stop mode.
+					setTimeout(() => this.requestUpdate(), 0);
 					break;
 				case "message_update":
 					if (this._streamingContainer) {
