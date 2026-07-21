@@ -173,9 +173,6 @@ export class AgentInterface extends LitElement {
 						this._streamingContainer.setMessage(null, true);
 					}
 					this.requestUpdate();
-					// AgentCore clears state.isStreaming after agent_end listeners complete.
-					// Re-render once that lifecycle callback has finished so the editor exits stop mode.
-					setTimeout(() => this.requestUpdate(), 0);
 					break;
 				case "message_update":
 					if (this._streamingContainer) {
@@ -251,16 +248,20 @@ export class AgentInterface extends LitElement {
 		this._autoScroll = true; // Enable auto-scroll when sending a message
 
 		// Compose message with attachments if any
-		if (attachments && attachments.length > 0) {
-			const message: UserMessageWithAttachments = {
-				role: "user-with-attachments",
-				content: input,
-				attachments,
-				timestamp: Date.now(),
-			};
-			await this.session?.prompt(message);
-		} else {
-			await this.session?.prompt(input);
+		try {
+			if (attachments && attachments.length > 0) {
+				const message: UserMessageWithAttachments = {
+					role: "user-with-attachments",
+					content: input,
+					attachments,
+					timestamp: Date.now(),
+				};
+				await session.prompt(message);
+			} else {
+				await session.prompt(input);
+			}
+		} finally {
+			this.requestUpdate();
 		}
 	}
 
