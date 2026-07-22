@@ -108,9 +108,6 @@ importers:
       '@earendil-works/pi-ai':
         specifier: 0.75.3
         version: 0.75.3(@opentelemetry/api@1.9.1)(ws@8.21.1)(zod@3.25.76)
-      '@earendil-works/pi-tui':
-        specifier: ^0.75.3
-        version: 0.75.5
       '@lmstudio/sdk':
         specifier: ^1.5.0
         version: 1.5.0
@@ -369,10 +366,6 @@ packages:
     resolution: {integrity: sha512-UKccS+ADlkSVJ49a00346jUfXmUi6zzzB+pPWotsyA6SxhKr2ejjkGQksGyR1DyNVrsEP/WWlsOSTUUwVlzNaA==}
     engines: {node: '>=22.19.0'}
     hasBin: true
-
-  '@earendil-works/pi-tui@0.75.5':
-    resolution: {integrity: sha512-LkXUM1/49pvzzeI39Y5wjBMlgafcCf67HCLhB9Z7yuXHy4XgT+VqxWcZVW5hBdhQsHZd0znjJotfGH1BzxMfiA==}
-    engines: {node: '>=22.19.0'}
 
   '@esbuild/aix-ppc64@0.28.1':
     resolution: {integrity: sha512-Svl7tq8k/08+p6CXPpRjQ1fKX+1odH/BQbb48fV6fj3CWHhsoIOoY87w1oHXm0qEpkIK3ZfVgp0hed3XBXzXMQ==}
@@ -1580,11 +1573,6 @@ packages:
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
-  marked@15.0.12:
-    resolution: {integrity: sha512-8dD6FusOQSrpv9Z1rdNMdlSgQOIP880DHqnohobOmYLElGEqAL/JvxvuxZO16r4HtjTlfPRDC1hbvxC9dPN2nA==}
-    engines: {node: '>= 18'}
-    hasBin: true
-
   marked@16.4.2:
     resolution: {integrity: sha512-TI3V8YYWvkVf3KJe1dRkpnjs68JUPyEa5vjKrp1XEEJUAOaQc+Qj+L1qWbPd0SJuAdQkFU0h73sXXqwDYxsiDA==}
     engines: {node: '>= 20'}
@@ -2217,11 +2205,6 @@ snapshots:
       - utf-8-validate
       - ws
       - zod
-
-  '@earendil-works/pi-tui@0.75.5':
-    dependencies:
-      get-east-asian-width: 1.6.0
-      marked: 15.0.12
 
   '@esbuild/aix-ppc64@0.28.1':
     optional: true
@@ -3160,8 +3143,6 @@ snapshots:
   magic-string@0.30.21:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
-
-  marked@15.0.12: {}
 
   marked@16.4.2: {}
 
