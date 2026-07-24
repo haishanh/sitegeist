@@ -392,8 +392,11 @@ const createAgent = async (initialState?: Partial<AgentState>, shouldSave = true
 		},
 		convertToLlm: browserMessageTransformer,
 		toolExecution: "sequential",
-		streamFn: createStreamFn(async () => {
-			const enabled = await storage.settings.get<boolean>("proxy.enabled");
+		streamFn: createStreamFn(async (model) => {
+			const enabled =
+				model.provider === "deepseek"
+					? await storage.settings.get<boolean>("proxy.deepseek.enabled")
+					: await storage.settings.get<boolean>("proxy.enabled");
 			if (!enabled) return undefined;
 			return (await storage.settings.get<string>("proxy.url")) || undefined;
 		}),

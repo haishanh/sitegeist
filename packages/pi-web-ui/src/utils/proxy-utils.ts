@@ -31,6 +31,10 @@ export function shouldUseProxyForProvider(provider: string, apiKey: string): boo
 			// Codex uses chatgpt.com/backend-api which has no CORS
 			return true;
 
+		case "deepseek":
+			// DeepSeek proxy usage is controlled by the provider key setting
+			return true;
+
 		// These providers work without proxy
 		case "openai":
 		case "google":
@@ -124,10 +128,10 @@ export function isCorsError(error: unknown): boolean {
  * @param getProxyUrl - Async function to get current proxy URL (or undefined if disabled)
  * @returns A streamFn compatible with Agent's streamFn option
  */
-export function createStreamFn(getProxyUrl: () => Promise<string | undefined>) {
+export function createStreamFn(getProxyUrl: (model: Model<any>) => Promise<string | undefined>) {
 	return async (model: Model<any>, context: Context, options?: SimpleStreamOptions) => {
 		const apiKey = options?.apiKey;
-		const proxyUrl = await getProxyUrl();
+		const proxyUrl = await getProxyUrl(model);
 
 		if (!apiKey || !proxyUrl) {
 			return streamSimple(model, context, options);

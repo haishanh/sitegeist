@@ -2,6 +2,7 @@ import { type Context, complete, getModel } from "@earendil-works/pi-ai";
 import { i18n } from "@mariozechner/mini-lit";
 import { Badge } from "@mariozechner/mini-lit/dist/Badge.js";
 import { Button } from "@mariozechner/mini-lit/dist/Button.js";
+import { Switch } from "@mariozechner/mini-lit/dist/Switch.js";
 import { html, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { getAppStorage } from "../storage/app-storage.ts";
@@ -29,6 +30,7 @@ export class ProviderKeyInput extends LitElement {
 	@state() private failed = false;
 	@state() private hasKey = false;
 	@state() private inputChanged = false;
+	@state() private deepseekProxyEnabled = false;
 
 	protected createRenderRoot() {
 		return this;
@@ -37,6 +39,10 @@ export class ProviderKeyInput extends LitElement {
 	override async connectedCallback() {
 		super.connectedCallback();
 		await this.checkKeyStatus();
+		if (this.provider === "deepseek") {
+			const enabled = await getAppStorage().settings.get<boolean>("proxy.deepseek.enabled");
+			this.deepseekProxyEnabled = enabled ?? false;
+		}
 	}
 
 	private async checkKeyStatus() {
@@ -58,8 +64,12 @@ export class ProviderKeyInput extends LitElement {
 			if (!model) return false;
 
 			// Get proxy URL from settings (if available)
-			const proxyEnabled = await getAppStorage().settings.get<boolean>("proxy.enabled");
-			const proxyUrl = await getAppStorage().settings.get<string>("proxy.url");
+			const storage = getAppStorage();
+			const proxyEnabled =
+				provider === "deepseek"
+					? await storage.settings.get<boolean>("proxy.deepseek.enabled")
+					: await storage.settings.get<boolean>("proxy.enabled");
+			const proxyUrl = await storage.settings.get<string>("proxy.url");
 
 			// Apply proxy only if this provider/key combination requires it
 			model = applyProxyIfNeeded(model, apiKey, proxyEnabled ? proxyUrl || undefined : undefined);
@@ -147,6 +157,20 @@ export class ProviderKeyInput extends LitElement {
 						children: i18n("Save"),
 					})}
 				</div>
+				${
+					this.provider === "deepseek"
+						? html`<div class="flex items-center justify-between">
+							<span class="text-sm text-muted-foreground">${i18n("Use CORS Proxy")}</span>
+							${Switch({
+								checked: this.deepseekProxyEnabled,
+								onChange: (checked: boolean) => {
+									this.deepseekProxyEnabled = checked;
+									getAppStorage().settings.set("proxy.deepseek.enabled", checked);
+								},
+							})}
+						</div>`
+						: ""
+				}
 			</div>
 		`;
 	}

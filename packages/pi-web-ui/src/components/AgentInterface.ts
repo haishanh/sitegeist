@@ -136,9 +136,14 @@ export class AgentInterface extends LitElement {
 
 		// Set default streamFn with proxy support if not already set
 		if (this.session.streamFn === streamSimple) {
-			this.session.streamFn = createStreamFn(async () => {
-				const enabled = await getAppStorage().settings.get<boolean>("proxy.enabled");
-				return enabled ? (await getAppStorage().settings.get<string>("proxy.url")) || undefined : undefined;
+			this.session.streamFn = createStreamFn(async (model) => {
+				const storage = getAppStorage();
+				const enabled =
+					model.provider === "deepseek"
+						? await storage.settings.get<boolean>("proxy.deepseek.enabled")
+						: await storage.settings.get<boolean>("proxy.enabled");
+				if (!enabled) return undefined;
+				return (await storage.settings.get<string>("proxy.url")) || undefined;
 			});
 		}
 
