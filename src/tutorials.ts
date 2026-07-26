@@ -1,5 +1,18 @@
 export const tutorials = [
 	{
+		label: "Takeaways",
+		prompt: "What's the takeaways here",
+	},
+
+	{
+		label: "ELI5",
+		prompt: `It's been a long day and my brain is fried, talk to me like I'm 5.
+
+Small words, short sentences, short paragraphs. If you have to use a big word, explain it right after. Only return what's actually necessary.`,
+	},
+	///
+
+	{
 		label: "What is Sitegeist?",
 		prompt: `You are about to help a non-technical user understand Sitegeist through an interactive tutorial. Guide them step-by-step through Sitegeist's capabilities.
 
